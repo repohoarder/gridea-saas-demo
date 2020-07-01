@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+
+@tailwind utilities;
+
+body {
+  line-height: 1.6;
+}
+
+.post-item {
+  .post-title {
+    transition: color 0.3s ease-in-out;
+  }
+  &:hover {
+    .post-title {
+      @apply text-indigo-700;
+    }
+    .read-more {
+      &::after {
+        opacity: 1;
+        margin-left: 4px;
+      }
+    }
+  }
+}
+
+.read-more {
+  &::after {
+    content: '→';
+    @apply text-indigo-700 font-light;
+    margin-left: 2px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+  }
+}
+
+.toc-container {
+  top: 148px;
+  max-height: calc(100vh - 148px);
+  width: 350px;
+  padding-left: 128px;
+
+  .toc {
+    @apply -ml-2;
+    ul {
+      @apply pl-2;
+    }
+    li a {
+      @apply text-sm mt-2 text-gray-700 opacity-75 font-light;
+      display: block;
+      text-decoration: none;
+      transition: opacity 500ms ease 0s;
+    }
+  }
+}
+
+.post-content {
+  @apply text-gray-900 flex-1;
+
+  line-height: 1.6;
+  font-size: 19px;
+  font-weight: 300;
+  &:focus {
+    outline: none;
+  }
+
+  h2,
+  h3,
+  p,
+  pre,
+  hr,
+  blockquote {
+    @apply mb-8;
+  }
+
+  h2 {
+    @apply text-3xl font-normal;
+  }
+  h3 {
+    @apply text-2xl font-normal;
+  }
+
+  ul li {
+    @apply pl-4 relative;
+    &:before {
+      content: '';
+      background-color: currentColor;
+      margin-top: 10px;
+      @apply block absolute left-0 top-0 w-1 h-1 rounded-full;
+    }
+  }
+
+  ol {
+    list-style: none;
+    counter-reset: counts 0;
+  }
+
+  ol li:before {
+    content: counters(counts, '.') '. ';
+    padding-right: 12px;
+    font-weight: normal;
+    font-feature-settings: 'tnum';
+  }
+
+  ol li {
+    display: flex;
+    counter-increment: counts 1;
+  }
+
+  pre {
+    @apply p-4 text-base border border-gray-200 whitespace-pre-wrap;
+    background: #fefefe;
+  }
+  hr {
+    height: 1px;
+    @apply border-none bg-gray-200;
+  }
+  p {
+    code {
+      @apply bg-indigo-100 text-sm py-1 px-1 rounded-sm text-indigo-600;
+    }
+  }
+  s {
+    @apply text-gray-500;
+  }
+  blockquote {
+    @apply px-4 py-2 text-gray-500 relative;
+    &::before {
+      content: '';
+      display: block;
+      width: 2px;
+      @apply absolute left-0 top-0 h-full bg-gray-200;
+    }
+    p:last-of-type {
+      @apply mb-0;
+    }
+  }
+
+  a {
+    display: inline-block;
+    position: relative;
+    font-weight: normal;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: -2px;
+      right: -2px;
+      bottom: 0px;
+      height: 2px;
+      border-radius: 2px;
+      @apply bg-gray-400;
+    }
+  }
+}
+
